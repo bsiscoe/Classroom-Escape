@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerAttributes : MonoBehaviour
 {
+    public List<GameObject> collidingTriggers;
     private Rigidbody2D rb;
     public float speed = 5f;
+    public bool hasFlashlight;
+    public Transform flashlight;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,50 @@ public class PlayerAttributes : MonoBehaviour
         change.Normalize();
         // Moves the player's position in the direction of the change
         rb.MovePosition(this.transform.position + change * speed * Time.deltaTime);
+        UpdateFlashlightDirection(change);
+    }
 
+    void Update()
+    {
+        bool inRangeOfTrigger = collidingTriggers.Count > 0;
+        if (Input.GetKeyDown("space") && inRangeOfTrigger)
+        {
+            collidingTriggers[0].GetComponent<IInteractable>().Interact();
+        }
+        if (Input.GetKeyDown("f"))
+        {
+
+        }
+    }
+
+    void UpdateFlashlightDirection(Vector3 direction)
+    {
+        if (direction.y < 0)
+        {
+            flashlight.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (direction.y > 0)
+        {
+            flashlight.rotation = Quaternion.Euler(0, 0, 180);
+        }
+        else if (direction.x > 0)
+        {
+            flashlight.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (direction.x < 0)
+        {
+            flashlight.rotation = Quaternion.Euler(0, 0, 270);
+        }
+    }
+
+    public void AddTrigger(GameObject trigger)
+    {
+        collidingTriggers.Add(trigger);
+    }
+
+    public void RemoveTrigger(GameObject trigger)
+    {
+        collidingTriggers.Remove(trigger);
     }
 }
+

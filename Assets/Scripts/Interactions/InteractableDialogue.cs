@@ -17,41 +17,36 @@ public class InteractableDialogue : Interactable
     public TextMeshProUGUI dialogueText;
     public DialogueList dialogue;
     public int dialogueIndex = 0;
-    
-    void Update()
-    {
-        if (!playerInRange)
-        {
-            return;
-        }
-        if (Input.GetKeyDown("space"))
-        {
-            playDialogue();
-        }
-    }
 
+    public bool done;
+
+    
+    
+    
     public void playDialogue() {
         if (!playerInRange)
         {
             return;
         }
-
-        if (Input.GetKeyDown("space")) {
-            if (!dialogueBox.activeInHierarchy) 
-            {
-                progressDialogue();
-                openDialogueUI();
-            } 
-            else 
-            {
-                progressDialogue();
-            }
+        Debug.Log("test");
+        if (!dialogueBox.activeInHierarchy) 
+        {
+            Debug.Log("1");
+            progressDialogue();
+            openDialogueUI();
         } 
+        else 
+        {
+            Debug.Log("2");
+            progressDialogue();
+        }
     }
 
     void openDialogueUI() 
     {
+        Debug.Log("open");
         dialogueBox.SetActive(true);
+        done = false;
     }
 
     void closeDialogueUI() 
@@ -62,6 +57,7 @@ public class InteractableDialogue : Interactable
 
     void progressDialogue()
      {
+        Debug.Log("progress");
         if (currentState == dialogueState.defaultDialogue)
         {
             if (dialogueIndex < dialogue.defaultDialogue.Count) 
@@ -70,6 +66,7 @@ public class InteractableDialogue : Interactable
             }
             else 
             {
+                done = true;
                 closeDialogueUI();
             }
         }
@@ -81,6 +78,7 @@ public class InteractableDialogue : Interactable
             }
             else 
             {
+                done = true;
                 closeDialogueUI();
             }
         }
@@ -92,6 +90,7 @@ public class InteractableDialogue : Interactable
             }
             else 
             {
+                done = true;
                 closeDialogueUI();
             }
         }
@@ -103,6 +102,7 @@ public class InteractableDialogue : Interactable
             }
             else 
             {
+                done = true;
                 closeDialogueUI();
                 currentState = dialogueState.defaultDialogue;
             }
