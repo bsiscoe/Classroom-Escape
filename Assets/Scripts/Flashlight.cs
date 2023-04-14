@@ -8,7 +8,6 @@ public class Flashlight : InteractableDialogue, IInteractable
         playDialogue();
         if (done)
         {
-            
             Destroy(this.transform.parent.gameObject);
         }
     }

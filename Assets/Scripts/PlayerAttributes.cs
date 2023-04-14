@@ -8,7 +8,8 @@ public class PlayerAttributes : MonoBehaviour
     private Rigidbody2D rb;
     public float speed = 5f;
     public bool hasFlashlight;
-    public Transform flashlight;
+    public Animator flashlight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,23 +43,35 @@ public class PlayerAttributes : MonoBehaviour
         }
     }
 
+    void ResetFlashlightBool()
+    {
+        foreach (AnimatorControllerParameter parameter in flashlight.parameters)
+        {
+            flashlight.SetBool(parameter.name, false);
+        }
+    }
+
     void UpdateFlashlightDirection(Vector3 direction)
     {
         if (direction.y < 0)
         {
-            flashlight.rotation = Quaternion.Euler(0, 0, 0);
+            ResetFlashlightBool();
+            flashlight.SetBool("down", true);
         }
         else if (direction.y > 0)
         {
-            flashlight.rotation = Quaternion.Euler(0, 0, 180);
+            ResetFlashlightBool();
+            flashlight.SetBool("up", true);
         }
         else if (direction.x > 0)
         {
-            flashlight.rotation = Quaternion.Euler(0, 0, 90);
+            ResetFlashlightBool();
+            flashlight.SetBool("right", true);
         }
         else if (direction.x < 0)
         {
-            flashlight.rotation = Quaternion.Euler(0, 0, 270);
+            ResetFlashlightBool();
+            flashlight.SetBool("left", true);
         }
     }
 
