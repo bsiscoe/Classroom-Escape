@@ -9,6 +9,7 @@ public class PlayerAttributes : MonoBehaviour
     public float speed = 5f;
     public bool hasFlashlight;
     public Animator flashlight;
+    public bool isReading;
 
     // Start is called before the first frame update
     void Start()
@@ -25,15 +26,18 @@ public class PlayerAttributes : MonoBehaviour
         change.y = Input.GetAxisRaw("Vertical");
         // Normalizes the Vector3 so that it conveys just the direction, not distance
         change.Normalize();
-        // Moves the player's position in the direction of the change
-        rb.MovePosition(this.transform.position + change * speed * Time.deltaTime);
-        UpdateFlashlightDirection(change);
+        // Moves the player's position in the direction of the change, if they are not reading forced dialogue
+        if (!isReading)
+        {
+            rb.MovePosition(this.transform.position + change * speed * Time.deltaTime);
+            UpdateFlashlightDirection(change);
+        }
     }
 
     void Update()
     {
         bool inRangeOfTrigger = collidingTriggers.Count > 0;
-        if (Input.GetKeyDown("space") && inRangeOfTrigger)
+        if (Input.GetKeyDown("space") && inRangeOfTrigger && !isReading)
         {
             collidingTriggers[0].GetComponent<IInteractable>().Interact();
         }
