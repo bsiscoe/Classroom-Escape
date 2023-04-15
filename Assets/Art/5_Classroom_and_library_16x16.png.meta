@@ -235,21 +235,21 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 512
+        y: 496
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 7}
-        - {x: -5, y: 3}
-        - {x: -8, y: 3}
+      - - {x: 0, y: 15}
+        - {x: -5, y: 11}
+        - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 3}
-        - {x: 5, y: 3}
+        - {x: 8, y: 11}
+        - {x: 5, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: 25e8efc163905bf4cae647f7c497efb6
@@ -263,9 +263,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 512
+        y: 496
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,8 +273,8 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 3}
-        - {x: -8, y: 3}
+        - {x: 8, y: 11}
+        - {x: -8, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: f30a7e42e5a52e349a9005254c0d5ec7
@@ -288,21 +288,21 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 512
+        y: 496
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 3, y: 6}
-        - {x: 0, y: 3}
-        - {x: -8, y: 3}
+      - - {x: 3, y: 14}
+        - {x: 0, y: 11}
+        - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 3}
-        - {x: 6, y: 3}
+        - {x: 8, y: 11}
+        - {x: 6, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: 417b1db8c0be4d84b964f743485dd360
@@ -316,22 +316,22 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 512
+        y: 496
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 4, y: 4}
-        - {x: -1, y: 4}
-        - {x: -1, y: 3}
-        - {x: -8, y: 3}
+      - - {x: 4, y: 12}
+        - {x: -1, y: 12}
+        - {x: -1, y: 11}
+        - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 3}
-        - {x: 4, y: 3}
+        - {x: 8, y: 11}
+        - {x: 4, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: d57e06aead45cf745833da6fb0f6f9bb
@@ -567,90 +567,6 @@ TextureImporter:
       bones: []
       spriteID: 0b77c5d755980b04fa9e1497590a2d46
       internalID: -1745954717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 5_Classroom_and_library_16x16_21
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 496
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51ba36e6c95099247b1489f6fe2f048b
-      internalID: -283192599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 5_Classroom_and_library_16x16_22
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 496
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7011d60d921919845ad75bf3647cf111
-      internalID: 2037554661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 5_Classroom_and_library_16x16_23
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 496
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f11d39699456a34da458c33bb1eb557
-      internalID: 1547492128
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 5_Classroom_and_library_16x16_24
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 496
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 900d9773883b4604fa93a8f1fd6dad57
-      internalID: -38544863
       vertices: []
       indices: 
       edges: []
