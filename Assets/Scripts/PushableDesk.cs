@@ -13,6 +13,11 @@ public class PushableDesk : MonoBehaviour, IInteractable
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    void Update()
+    {
+        this.transform.parent.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+    }
+
     public void Interact()
     {
         if (!currentlyPushing) {
@@ -24,12 +29,10 @@ public class PushableDesk : MonoBehaviour, IInteractable
         }
     }
     
-    bool IsRelativePositionHorizontal(Vector3 currentObject, Vector3 other)
+    bool IsRelativePositionHorizontal()
     {
-        float yDistance = currentObject.y - other.y;
-        float xDistance = currentObject.x - other.x;
-        bool isHorizontal = Mathf.Abs(yDistance) < Mathf.Abs(xDistance);
-        return isHorizontal;
+        return this.gameObject.HasTag("Horizontal");
+
     }
 
     float GetHorizontalDistance(Vector3 currentObject, Vector3 other)
@@ -51,17 +54,36 @@ public class PushableDesk : MonoBehaviour, IInteractable
         {
             if (isHorizontal)
             {
+                RestrictPlayerMovement(isHorizontal, horizontalDistance);
                 Vector3 newPosition = player.transform.position - new Vector3(horizontalDistance, 0.2f, 0);
-                Debug.Log(newPosition.x);
                 desk.MovePosition(newPosition);
             }
             else
             {
+                RestrictPlayerMovement(!isHorizontal, verticalDistance);
                 Vector3 newPosition = player.transform.position - new Vector3(0, verticalDistance, 0);
                 desk.MovePosition(newPosition);
             }
             yield return null;
         }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("test");
+        if (collision.gameObject.HasTag("Player"))
+        {
+            return;
+        }
+        this.transform.gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.HasTag("Player"))
+        {
+            return;
+        }
+        this.transform.gameObject.layer = LayerMask.NameToLayer("Player Noncollision");
     }
 
     void EnablePushPullState()
@@ -70,7 +92,7 @@ public class PushableDesk : MonoBehaviour, IInteractable
         this.transform.parent.gameObject.layer = LayerMask.NameToLayer("Player Noncollision");
         this.transform.parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
-        bool isHorizontal = IsRelativePositionHorizontal(player.transform.position, this.transform.position);
+        bool isHorizontal = IsRelativePositionHorizontal();
         if (isHorizontal)
         {
             attributes.canMoveVertical = false;
@@ -92,5 +114,54 @@ public class PushableDesk : MonoBehaviour, IInteractable
         attributes.canMoveHorizontal = true;
         attributes.canMoveVertical = true;
         attributes.SetSpeed(attributes.walkingSpeed);
+        ResetPlayerMovement();
+    }
+
+    void RestrictPlayerMovement(bool isHorizontal, float maxDistance)
+    {
+        ResetPlayerMovement();
+        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
+        maxDistance = Mathf.Abs(maxDistance);
+        if (isHorizontal)
+        {
+            float distance = GetHorizontalDistance(player.transform.position, this.transform.parent.transform.position);
+            if (Mathf.Abs(distance) > maxDistance + 0.1f)
+            {
+                if (distance < 0)
+                {
+                    attributes.canMoveLeft = false;
+                    //player.transform.position = this.transform.parent.transform.position - new Vector3(maxDistance, 0, 0);
+                }
+                else if (distance > 0)
+                {
+                    attributes.canMoveRight = false;
+                    //player.transform.position = this.transform.parent.transform.position + new Vector3(maxDistance, 0, 0);
+                }
+            }
+        }
+        else
+        {
+            float distance = GetVerticalDistance(player.transform.position, this.transform.parent.transform.position);
+            if (Mathf.Abs(distance) > maxDistance + 0.1f)
+            {
+                if (distance < 0)
+                {
+                    player.transform.position = this.transform.parent.transform.position - new Vector3(0, maxDistance + 0.1f, 0);
+                }
+                else if (distance > 0)
+                {
+                    player.transform.position = this.transform.parent.transform.position + new Vector3(0, maxDistance + 0.1f, 0);
+                }
+            }
+        }
+    }
+
+    void ResetPlayerMovement()
+    {
+        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
+        attributes.canMoveDown = true;
+        attributes.canMoveUp = true;   
+        attributes.canMoveLeft = true;
+        attributes.canMoveRight = true;
     }
 }

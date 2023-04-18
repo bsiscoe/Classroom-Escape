@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractDoor : InteractableDialogue
+public class InteractDoor : Interactable
 {
     public Animator anim;
+    private bool isOpen;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = this.transform.parent.GetComponent<Animator>();
     }
 
     void Update()
@@ -17,19 +18,28 @@ public class InteractDoor : InteractableDialogue
         {
             return;
         }
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            playDialogue();
+            if (!isOpen)
+            {
+                OpenDoor();
+            }
+            else
+            {
+                CloseDoor();
+            }
         }
     }
 
-    public void openDoor()
+    public void OpenDoor()
     {
         anim.SetBool("isOpen", true);
+        isOpen = true;
     }
 
-    public void closeDoor()
+    public void CloseDoor()
     {
-
+        anim.SetBool("isOpen", false);
+        isOpen = false;
     }
 }

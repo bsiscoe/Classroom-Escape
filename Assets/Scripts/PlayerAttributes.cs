@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerAttributes : MonoBehaviour
 {
@@ -9,18 +10,22 @@ public class PlayerAttributes : MonoBehaviour
     public float walkingSpeed = 5f;
     private float speed;
     public bool hasFlashlight;
-    public Animator flashlight;
+    public Flashlight flashlight;
 
-    public bool canMoveHorizontal;
-    public bool canMoveVertical;
+    public bool canMoveHorizontal = true;
+    public bool canMoveVertical = true;
+
+    public bool canMoveLeft = true;
+    public bool canMoveRight = true;
+    public bool canMoveUp = true;
+    public bool canMoveDown = true;
 
     // Start is called before the first frame update
     void Start()
     {
         speed = walkingSpeed;
         rb = GetComponent<Rigidbody2D>();
-        canMoveHorizontal = true; 
-        canMoveVertical = true;
+        flashlight = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>();
     }
 
     // Update is called once per frame
@@ -36,12 +41,13 @@ public class PlayerAttributes : MonoBehaviour
         {
             change.y = Input.GetAxisRaw("Vertical");
         }
+        change = RestrictMovement(change);
         // Normalizes the Vector3 so that it conveys just the direction, not distance
         change.Normalize();
         // Moves the player's position in the direction of the change
         Vector3 newPosition = this.transform.position + (speed * Time.deltaTime * change);
         rb.MovePosition(newPosition);
-        UpdateFlashlightDirection(change);
+        flashlight.UpdateFlashlightDirection(change);
     }
 
     void Update()
@@ -53,7 +59,7 @@ public class PlayerAttributes : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-
+            flashlight.ToggleFlashLight();
         }
     }
 
@@ -61,37 +67,41 @@ public class PlayerAttributes : MonoBehaviour
     {
         this.speed = speed;
     }
-    void ResetFlashlightBool()
+
+    Vector3 RestrictMovement(Vector3 change)
     {
-        foreach (AnimatorControllerParameter parameter in flashlight.parameters)
+        if (!canMoveLeft)
         {
-            flashlight.SetBool(parameter.name, false);
+            if (change.x < 0)
+            {
+                change.x = 0;
+            }
         }
+        if (!canMoveRight)
+        {
+            if (change.x > 0)
+            {
+                change.x = 0;
+            }
+        }
+        if (!canMoveUp)
+        {
+            if (change.y > 0)
+            {
+                change.y = 0;
+            }
+        }
+        if (!canMoveDown)
+        {
+            if (change.y > 0)
+            {
+                change.y = 0;
+            }
+        }
+        return change;
     }
 
-    void UpdateFlashlightDirection(Vector3 direction)
-    {
-        if (direction.y < 0)
-        {
-            ResetFlashlightBool();
-            flashlight.SetBool("down", true);
-        }
-        else if (direction.y > 0)
-        {
-            ResetFlashlightBool();
-            flashlight.SetBool("up", true);
-        }
-        else if (direction.x > 0)
-        {
-            ResetFlashlightBool();
-            flashlight.SetBool("right", true);
-        }
-        else if (direction.x < 0)
-        {
-            ResetFlashlightBool();
-            flashlight.SetBool("left", true);
-        }
-    }
+   
 
     public void AddTrigger(GameObject trigger)
     {
