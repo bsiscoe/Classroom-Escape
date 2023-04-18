@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - GlobalLight
+<<<<<<< Updated upstream
+=======
+  - DialogueBox
+  - DialogueText
+>>>>>>> Stashed changes
   - Flashlight
   layers:
   - Default

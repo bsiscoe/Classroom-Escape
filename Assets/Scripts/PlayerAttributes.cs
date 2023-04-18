@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
+<<<<<<< Updated upstream
+=======
+public enum PlayerState
+{
+    reading,
+    idle,
+    walking
+}
+
+>>>>>>> Stashed changes
 public class PlayerAttributes : MonoBehaviour
 {
     public List<GameObject> collidingTriggers;
@@ -11,6 +21,10 @@ public class PlayerAttributes : MonoBehaviour
     private float speed;
     public bool hasFlashlight;
     public Flashlight flashlight;
+<<<<<<< Updated upstream
+=======
+	public PlayerState currentState;
+>>>>>>> Stashed changes
 
     public bool canMoveHorizontal = true;
     public bool canMoveVertical = true;
@@ -23,6 +37,10 @@ public class PlayerAttributes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
+=======
+		currentState = PlayerState.idle
+>>>>>>> Stashed changes
         speed = walkingSpeed;
         rb = GetComponent<Rigidbody2D>();
         flashlight = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>();
@@ -44,16 +62,31 @@ public class PlayerAttributes : MonoBehaviour
         change = RestrictMovement(change);
         // Normalizes the Vector3 so that it conveys just the direction, not distance
         change.Normalize();
+<<<<<<< Updated upstream
         // Moves the player's position in the direction of the change
         Vector3 newPosition = this.transform.position + (speed * Time.deltaTime * change);
         rb.MovePosition(newPosition);
         flashlight.UpdateFlashlightDirection(change);
     }
+=======
+        // Moves the player's position in the direction of the change, if they are not reading forced dialogue
+        if (currentState != PlayerState.reading)
+        {
+			Vector3 newPosition = this.transform.position + (speed * Time.deltaTime * change);
+			rb.MovePosition(newPosition);
+			flashlight.UpdateFlashlightDirection(change);
+		}
+	}
+>>>>>>> Stashed changes
 
     void Update()
     {
         bool inRangeOfTrigger = collidingTriggers.Count > 0;
+<<<<<<< Updated upstream
         if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger)
+=======
+        if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger && currentState != PlayerState.reading)
+>>>>>>> Stashed changes
         {
             collidingTriggers[0].GetComponent<IInteractable>().Interact();
         }
