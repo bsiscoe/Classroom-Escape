@@ -18,7 +18,7 @@ public class DialogueAPI : Interactable
     public List<string[]> dialougeBatches = new List<string[]>();
     public int currentSet = 0;
     GameObject player;
-
+    
     public void Start()
     {
         Debug.Log("Going");
@@ -28,9 +28,12 @@ public class DialogueAPI : Interactable
         getBatches = dialogueText.text.Split("\n*--*\n", StringSplitOptions.RemoveEmptyEntries).ToList();
         foreach (string batch in getBatches) 
         {
+            if (batch.StartsWith("//"))
+            {
+                continue;
+            }
             dialougeBatches.Add(batch.Split('\n'));
         }
-        StartCoroutine(PlayDialogue());
     }
     public void DebugTestOutput()
     {
@@ -64,12 +67,18 @@ public class DialogueAPI : Interactable
 
     IEnumerator PlayForced()
     {
-        textBox.GetComponent<RawImage>().enabled = true;
-        textInBox.enabled = true;
+        bool firstLine = true;
         player.GetComponent<PlayerAttributes>().currentState = PlayerState.reading;
         foreach (string line in dialougeBatches[currentSet]) 
         {
             textInBox.text = line;
+            if (firstLine)
+            {
+                yield return null;
+                textBox.GetComponent<RawImage>().enabled = true;
+                textInBox.enabled = true;
+                firstLine = false;
+            }
             yield return WaitForInput();
         }
         textBox.GetComponent<RawImage>().enabled = false;

@@ -5,12 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - GlobalLight
-<<<<<<< Updated upstream
-=======
+  - Flashlight
+  - PlayerLight
   - DialogueBox
   - DialogueText
->>>>>>> Stashed changes
-  - Flashlight
   layers:
   - Default
   - TransparentFX

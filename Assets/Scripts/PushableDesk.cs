@@ -60,7 +60,7 @@ public class PushableDesk : MonoBehaviour, IInteractable
             }
             else
             {
-                RestrictPlayerMovement(!isHorizontal, verticalDistance);
+                RestrictPlayerMovement(isHorizontal, verticalDistance);
                 Vector3 newPosition = player.transform.position - new Vector3(0, verticalDistance, 0);
                 desk.MovePosition(newPosition);
             }
@@ -69,7 +69,6 @@ public class PushableDesk : MonoBehaviour, IInteractable
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        print("test");
         if (collision.gameObject.HasTag("Player"))
         {
             return;
@@ -130,12 +129,10 @@ public class PushableDesk : MonoBehaviour, IInteractable
                 if (distance < 0)
                 {
                     attributes.canMoveLeft = false;
-                    //player.transform.position = this.transform.parent.transform.position - new Vector3(maxDistance, 0, 0);
                 }
                 else if (distance > 0)
                 {
                     attributes.canMoveRight = false;
-                    //player.transform.position = this.transform.parent.transform.position + new Vector3(maxDistance, 0, 0);
                 }
             }
         }
@@ -146,11 +143,11 @@ public class PushableDesk : MonoBehaviour, IInteractable
             {
                 if (distance < 0)
                 {
-                    player.transform.position = this.transform.parent.transform.position - new Vector3(0, maxDistance + 0.1f, 0);
+                    attributes.canMoveDown = false;
                 }
                 else if (distance > 0)
                 {
-                    player.transform.position = this.transform.parent.transform.position + new Vector3(0, maxDistance + 0.1f, 0);
+                    attributes.canMoveUp = false;
                 }
             }
         }
