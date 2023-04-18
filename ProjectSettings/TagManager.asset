@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GlobalLight
+  - DialogueBox
+  - DialogueText
+  - PlayerLight
   layers:
   - Default
   - TransparentFX

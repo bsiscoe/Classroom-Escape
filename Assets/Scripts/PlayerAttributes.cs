@@ -1,6 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum PlayerState
+{
+    reading,
+    idle,
+    walking
+}
 
 public class PlayerAttributes : MonoBehaviour
 {
@@ -10,6 +16,7 @@ public class PlayerAttributes : MonoBehaviour
     public bool hasFlashlight;
     public Animator flashlight;
     public bool isReading;
+    public PlayerState currentState = PlayerState.idle;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +34,7 @@ public class PlayerAttributes : MonoBehaviour
         // Normalizes the Vector3 so that it conveys just the direction, not distance
         change.Normalize();
         // Moves the player's position in the direction of the change, if they are not reading forced dialogue
-        if (!isReading)
+        if (currentState != PlayerState.reading)
         {
             rb.MovePosition(this.transform.position + change * speed * Time.deltaTime);
             UpdateFlashlightDirection(change);
@@ -37,7 +44,7 @@ public class PlayerAttributes : MonoBehaviour
     void Update()
     {
         bool inRangeOfTrigger = collidingTriggers.Count > 0;
-        if (Input.GetKeyDown("space") && inRangeOfTrigger && !isReading)
+        if (Input.GetKeyDown("space") && inRangeOfTrigger && currentState != PlayerState.reading)
         {
             collidingTriggers[0].GetComponent<IInteractable>().Interact();
         }
