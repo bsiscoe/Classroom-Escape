@@ -5,7 +5,8 @@ using UnityEngine.Rendering.Universal;
 
 public enum PlayerState
 {
-    reading,
+    forcedReading,
+    unforcedReading,
     idle,
     walking
 }
@@ -54,7 +55,7 @@ public class PlayerAttributes : MonoBehaviour
         // Normalizes the Vector3 so that it conveys just the direction, not distance
         change.Normalize();
         // Moves the player's position in the direction of the change
-        if (currentState != PlayerState.reading)
+        if (currentState != PlayerState.forcedReading)
         {
             Vector3 newPosition = this.transform.position + (speed * Time.deltaTime * change);
             rb.MovePosition(newPosition);
@@ -66,7 +67,8 @@ public class PlayerAttributes : MonoBehaviour
     void Update()
     {
         bool inRangeOfTrigger = collidingTriggers.Count > 0;
-        if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger && currentState != PlayerState.reading)
+        bool isReading = currentState == PlayerState.unforcedReading || currentState == PlayerState.forcedReading;
+        if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger && !isReading)
         {
             collidingTriggers[0].GetComponent<IInteractable>().Interact();
         }

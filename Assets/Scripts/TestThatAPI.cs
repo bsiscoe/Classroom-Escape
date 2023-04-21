@@ -7,6 +7,7 @@ public class TestThatAPI : DialogueAPI, IInteractable
 
     public void Interact()
     {
-        StartCoroutine(PlayDialogue());
+        PlayDialogue();
     }
+   
 }

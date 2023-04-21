@@ -128,7 +128,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 289169069097952500, guid: cc7b2ee058ceaff45a68172a41bd3cee, type: 3}
   m_PrefabInstance: {fileID: 289169068702471328}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &12102013
+--- !u!114 &12102023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc94a2b8b4060e46913952214d18140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  batteryCount: 0
+  chargeDisplay: {fileID: 0}
+  flashlight: {fileID: 0}
+  isBatteryInfinite: 0
   currentBatteryCharge: 0
 --- !u!1 &84882104
 GameObject:
@@ -2374,17 +2376,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &473330895 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3271606633579838952, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
-  m_PrefabInstance: {fileID: 3271606633916008743}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &489309784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,9 +2517,10 @@ MonoBehaviour:
   playerInRange: 0
   context: {fileID: 11400000, guid: fae91ed3b2fd10c4a89590f9e81f581d, type: 2}
   dialogueText: {fileID: 4900000, guid: df7748e24aac7cf4da5b381274a79a6e, type: 3}
-  forceAllDialogue: 1
+  forceAllDialogue: 0
+  currentBatch: 1
+  timesRead: 0
   getBatches: []
-  currentSet: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,7 +2599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -9.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3194,11 +3186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
---- !u!1 &1440281096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3271606632629992239, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
-  m_PrefabInstance: {fileID: 3271606633916008743}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1460427692
 GameObject:
   m_ObjectHideFlags: 0
@@ -5207,7 +5194,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661922600}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.4, y: -2.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6065,7 +6052,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2030652330}
   - component: {fileID: 2030652332}
-  - component: {fileID: 2030652331}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -6088,26 +6074,6 @@ Transform:
   m_Father: {fileID: 1095134306}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030652331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030652329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f0f776a795d3244a8dbbf3799c5eeb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInRange: 0
-  context: {fileID: 11400000, guid: fae91ed3b2fd10c4a89590f9e81f581d, type: 2}
-  currentState: 0
-  dialogueBox: {fileID: 1440281096}
-  dialogueText: {fileID: 473330895}
-  dialogue: {fileID: 11400000, guid: 46689f1d86cf9024dbe3a7713f439ac6, type: 2}
-  dialogueIndex: 0
-  done: 0
 --- !u!61 &2030652332
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6205,6 +6171,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Flashlight
       objectReference: {fileID: 0}
+    - target: {fileID: 289169069097952502, guid: cc7b2ee058ceaff45a68172a41bd3cee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc7b2ee058ceaff45a68172a41bd3cee, type: 3}
 --- !u!1001 &3271606633916008743
@@ -6214,17 +6184,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3271606632629992237, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+    - target: {fileID: 585987096, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_TagString
+      value: FlashlightCharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573070910, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573070910, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2431105163436968953, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3271606632629992239, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 2431105163436968953, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_Texture
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3271606632629992239, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
-      propertyPath: m_TagString
-      value: DialogueBox
+    - target: {fileID: 3271606632629992237, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3271606633145170195, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
       propertyPath: m_Name
@@ -6314,13 +6296,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3271606633579838952, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3271606633579838954, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+    - target: {fileID: 5360543534432135783, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
       propertyPath: m_TagString
-      value: DialogueText
+      value: CG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}

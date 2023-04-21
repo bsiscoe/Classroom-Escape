@@ -1,25 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.Rendering.Universal;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class Flashlight : MonoBehaviour
 {
-    Light2D flashlight;
+
+    private Slider chargeDisplay;
+    private Light2D flashlight;
     private Animator anim;
-    public int batteryCount;
+    [HideInInspector] public bool isBatteryInfinite;
     public int currentBatteryCharge;
 
-    private void Start()
+    void Start()
     {
+        chargeDisplay = GameObject.FindGameObjectWithTag("FlashlightCharge").GetComponent<Slider>();
         flashlight = GetComponent<Light2D>();
         anim = GetComponent<Animator>();
+        isBatteryInfinite = false;
+        currentBatteryCharge = 100;
+        if (flashlight.enabled && !isBatteryInfinite)
+        {
+            InvokeRepeating("DrainBattery", 0, 5f);
+        }
+
+    }   
+
+    void Update()
+    {
+        UpdateBatteryUI();
+        if (!HasCharge())
+        {
+            flashlight.enabled = false;
+        }
     }
 
     public void ToggleFlashLight()
     {
-        flashlight.enabled = !flashlight.enabled;
+        if (!flashlight.enabled && HasCharge())
+        {
+            flashlight.enabled = true;
+            if (!isBatteryInfinite)
+            {
+                InvokeRepeating("DrainBattery", 0, 5f);
+            }
+        }
+        else
+        {
+            flashlight.enabled = false;
+            CancelInvoke("DrainBattery");
+        }
     }
 
     private void ResetFlashlightBool()
@@ -52,5 +82,41 @@ public class Flashlight : MonoBehaviour
             ResetFlashlightBool();
             anim.SetBool("left", true);
         }
+    }
+    void DrainBattery()
+    {
+        print("drain");
+        currentBatteryCharge--;
+    }
+
+    void ReloadBattery()
+    {
+        currentBatteryCharge = 100;
+    }
+
+    void UpdateBatteryUI()
+    { 
+        int batteryLevelInDisplay = (currentBatteryCharge + 19) / 20;
+        chargeDisplay.value = batteryLevelInDisplay;
+    }
+
+    bool HasCharge()
+    {
+        return currentBatteryCharge > 0;
+    }
+
+    public void DisableInfiniteBattery()
+    {
+        isBatteryInfinite = false;
+        if (flashlight.enabled)
+        {
+            InvokeRepeating("DrainBattery", 0, 5f);
+        }
+    }
+
+    public void EnableInfiniteBattery()
+    {
+        isBatteryInfinite = true;
+        CancelInvoke("DrainBattery");
     }
 }

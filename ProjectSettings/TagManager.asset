@@ -9,6 +9,11 @@ TagManager:
   - PlayerLight
   - DialogueBox
   - DialogueText
+  - CharacterPortrait
+  - NameBox
+  - NameText
+  - FlashlightCharge
+  - CG
   layers:
   - Default
   - TransparentFX
