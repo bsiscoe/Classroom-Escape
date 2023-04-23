@@ -14,10 +14,7 @@ TagManager:
   - NameText
   - FlashlightCharge
   - CG
-<<<<<<< Updated upstream
-=======
   - Fade
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

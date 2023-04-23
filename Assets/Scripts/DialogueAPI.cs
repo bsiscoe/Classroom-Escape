@@ -127,10 +127,7 @@ public class DialogueAPI : Interactable
     private void CloseDialogue()
     {
         CancelInvoke("IncreaseVisable");
-<<<<<<< Updated upstream
-=======
         CancelInvoke("ScrollAnimation");
->>>>>>> Stashed changes
         UnloadImage();
         UnloadName();
         UnloadCG();

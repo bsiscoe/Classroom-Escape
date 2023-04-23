@@ -65,10 +65,7 @@ public class PushableDesk : MonoBehaviour, IInteractable
             else
             {
                 RestrictPlayerMovement(isHorizontal, verticalDistance);
-<<<<<<< Updated upstream
-=======
                 RestrictPlayerDirection(isHorizontal);
->>>>>>> Stashed changes
                 Vector3 newPosition = player.transform.position - new Vector3(0, verticalDistance, 0);
                 desk.MovePosition(newPosition);
             }
