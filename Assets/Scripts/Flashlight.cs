@@ -119,4 +119,8 @@ public class Flashlight : MonoBehaviour
         isBatteryInfinite = true;
         CancelInvoke("DrainBattery");
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

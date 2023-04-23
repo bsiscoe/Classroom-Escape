@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PushableDesk : MonoBehaviour, IInteractable
 {
     private GameObject player;
     public float pushSpeed = 1f;
     public bool currentlyPushing;
+    PlayerAttributes attributes;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        attributes = player.GetComponent<PlayerAttributes>();
     }
 
     void Update()
@@ -55,12 +58,17 @@ public class PushableDesk : MonoBehaviour, IInteractable
             if (isHorizontal)
             {
                 RestrictPlayerMovement(isHorizontal, horizontalDistance);
-                Vector3 newPosition = player.transform.position - new Vector3(horizontalDistance, 0.2f, 0);
+                RestrictPlayerDirection(isHorizontal);
+                Vector3 newPosition = player.transform.position - new Vector3(horizontalDistance, 0.5f, 0);
                 desk.MovePosition(newPosition);
             }
             else
             {
                 RestrictPlayerMovement(isHorizontal, verticalDistance);
+<<<<<<< Updated upstream
+=======
+                RestrictPlayerDirection(isHorizontal);
+>>>>>>> Stashed changes
                 Vector3 newPosition = player.transform.position - new Vector3(0, verticalDistance, 0);
                 desk.MovePosition(newPosition);
             }
@@ -90,7 +98,6 @@ public class PushableDesk : MonoBehaviour, IInteractable
         currentlyPushing = true;
         this.transform.parent.gameObject.layer = LayerMask.NameToLayer("Player Noncollision");
         this.transform.parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
         bool isHorizontal = IsRelativePositionHorizontal();
         if (isHorizontal)
         {
@@ -106,10 +113,10 @@ public class PushableDesk : MonoBehaviour, IInteractable
 
     void DisablePushPullState()
     {
+        attributes.updateFacing = true;
         currentlyPushing = false;
         this.transform.parent.gameObject.layer = LayerMask.NameToLayer("Default");
         this.transform.parent.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
         attributes.canMoveHorizontal = true;
         attributes.canMoveVertical = true;
         attributes.SetSpeed(attributes.walkingSpeed);
@@ -119,7 +126,6 @@ public class PushableDesk : MonoBehaviour, IInteractable
     void RestrictPlayerMovement(bool isHorizontal, float maxDistance)
     {
         ResetPlayerMovement();
-        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
         maxDistance = Mathf.Abs(maxDistance);
         if (isHorizontal)
         {
@@ -153,9 +159,38 @@ public class PushableDesk : MonoBehaviour, IInteractable
         }
     }
 
+    void RestrictPlayerDirection(bool isHorizontal)
+    {
+        attributes.updateFacing = false;
+        if (isHorizontal)
+        {
+            bool playerIsLeftOfDesk = GetHorizontalDistance(player.transform.position, this.transform.position) < 0;
+            if (playerIsLeftOfDesk)
+            {
+                attributes.SetDirection(PlayerDirection.right);
+                
+            }
+            else
+            {
+                attributes.SetDirection(PlayerDirection.left);
+            }
+        }
+        else
+        {
+            bool playerIsAboveOfDesk = GetVerticalDistance(player.transform.position, this.transform.position) > 0;
+            if (playerIsAboveOfDesk)
+            {
+                attributes.SetDirection(PlayerDirection.down);
+            }
+            else
+            {
+                attributes.SetDirection(PlayerDirection.up);
+            }
+        }
+    }
+
     void ResetPlayerMovement()
     {
-        PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
         attributes.canMoveDown = true;
         attributes.canMoveUp = true;   
         attributes.canMoveLeft = true;

@@ -19,7 +19,7 @@ public class SceneTransition : MonoBehaviour
     }
     IEnumerator LoadScene()
     {
-        transition.SetTrigger("start");
+        transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneToLoad);
     }
