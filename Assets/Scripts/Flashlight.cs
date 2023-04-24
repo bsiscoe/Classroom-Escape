@@ -10,6 +10,7 @@ public class Flashlight : MonoBehaviour
     private Light2D flashlight;
     private Animator anim;
     [HideInInspector] public bool isBatteryInfinite;
+    public bool hasFlashlight;
     public int currentBatteryCharge;
 
     void Start()
@@ -18,6 +19,7 @@ public class Flashlight : MonoBehaviour
         flashlight = GetComponent<Light2D>();
         anim = GetComponent<Animator>();
         isBatteryInfinite = false;
+        hasFlashlight = false;
         currentBatteryCharge = 100;
         if (flashlight.enabled && !isBatteryInfinite)
         {
@@ -37,7 +39,7 @@ public class Flashlight : MonoBehaviour
 
     public void ToggleFlashLight()
     {
-        if (!flashlight.enabled && HasCharge())
+        if (!flashlight.enabled && HasCharge() && hasFlashlight)
         {
             flashlight.enabled = true;
             if (!isBatteryInfinite)
@@ -84,8 +86,7 @@ public class Flashlight : MonoBehaviour
         }
     }
     void DrainBattery()
-    {
-        print("drain");
+    { 
         currentBatteryCharge--;
     }
 

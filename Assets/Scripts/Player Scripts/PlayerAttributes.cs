@@ -10,7 +10,7 @@ public enum PlayerState
     forcedReading,
     unforcedReading,
     idle,
-    walking,
+    walking
 }
 
 public enum PlayerDirection
@@ -28,7 +28,6 @@ public class PlayerAttributes : MonoBehaviour
     Animator anim;
     public float walkingSpeed = 5f;
     private float speed;
-    public bool hasFlashlight;
     public Flashlight flashlight;
 
 
@@ -51,7 +50,7 @@ public class PlayerAttributes : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         flashlight = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>();
-        currentState = PlayerState.idle;
+        ChangeState(PlayerState.idle);
         currentDirection = PlayerDirection.down;
     }
 
@@ -80,10 +79,10 @@ public class PlayerAttributes : MonoBehaviour
         {
             UpdateDirection(change);
         }
-        UpdateAnimation(change);
         // Moves the player's position in the direction of the change
         if (currentState != PlayerState.forcedReading)
         {
+            UpdateAnimation(change);
             Vector3 newPosition = this.transform.position + (speed * Time.deltaTime * change);
             rb.MovePosition(newPosition);
             if (updateFacing)
@@ -92,7 +91,6 @@ public class PlayerAttributes : MonoBehaviour
             }
         }
     }
-
     void Update()
     {
         if (currentState == PlayerState.transition)
@@ -103,7 +101,11 @@ public class PlayerAttributes : MonoBehaviour
         bool isReading = currentState == PlayerState.unforcedReading || currentState == PlayerState.forcedReading;
         if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger && !isReading)
         {
-            collidingTriggers[0].GetComponent<IInteractable>().Interact();
+            IInteractable currentTrigger = collidingTriggers[0].GetComponent<IInteractable>();
+            if (currentTrigger != null)
+            {
+                currentTrigger.Interact();
+            }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -147,6 +149,15 @@ public class PlayerAttributes : MonoBehaviour
             }
         }
         return change;
+    }
+
+    public void ChangeState(PlayerState state)
+    {
+        if (state != PlayerState.walking)
+        {
+            anim.SetBool("Walking", false);
+        }
+        currentState = state;
     }
 
     void UpdateAnimation(Vector3 change)

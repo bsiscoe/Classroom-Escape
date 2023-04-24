@@ -32,12 +32,13 @@ public class DialogueAPI : Interactable
 
     RawImage CG;
 
-    GameObject player;
     public List<string> getBatches;
     public List<string[]> dialougeBatches;
 
     public void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttributes>();
+
         timesRead = 0;
         nextLine = false;
         dialougeBatches = new List<string[]>();
@@ -51,7 +52,6 @@ public class DialogueAPI : Interactable
         textInBox = GameObject.FindGameObjectWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
         CG = GameObject.FindGameObjectWithTag("CG").GetComponent<RawImage>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
         getBatches = dialogueText.text.Split("\n*--*\n").ToList();
         foreach (string batch in getBatches)
         {
@@ -68,11 +68,11 @@ public class DialogueAPI : Interactable
         bool firstLine = true;
         if (player != null && isForced)
         {
-            player.GetComponent<PlayerAttributes>().currentState = PlayerState.forcedReading;
+            player.ChangeState(PlayerState.forcedReading);
         }
         else if (player != null && !isForced)
         {
-            player.GetComponent<PlayerAttributes>().currentState = PlayerState.unforcedReading;
+            player.ChangeState(PlayerState.unforcedReading);
         }
         int linesRead = 0;
         foreach (string lineInBatch in dialougeBatches[currentBatch])
@@ -110,7 +110,7 @@ public class DialogueAPI : Interactable
         CloseDialogue();
         if (player != null)
         {
-            player.GetComponent<PlayerAttributes>().currentState = PlayerState.idle;
+            player.ChangeState(PlayerState.idle);
         }
         if (linesRead == dialougeBatches[currentBatch].Length)
         {
@@ -139,6 +139,7 @@ public class DialogueAPI : Interactable
     {
         textPosition.sizeDelta = new Vector2(100, 50);
         characterPortrait.texture = Resources.Load<Texture>(filepath);
+        print("Pic: " + characterPortrait.texture);
         characterPortrait.enabled = true;
     }
     private void LoadImage(Texture2D texture)
@@ -202,6 +203,7 @@ public class DialogueAPI : Interactable
         else if (line.StartsWith("[NAME]"))
         {
             string name = line.Substring(7);
+            print("Name to display: " + name);
             if (name == "NONE")
             {
                 UnloadName();
@@ -213,6 +215,7 @@ public class DialogueAPI : Interactable
         else if (line.StartsWith("[IMG]"))
         {
             string filepath = line.Substring(6);
+            print("File to display: " + filepath);
             CancelInvoke("ScrollAnimation");
             if (filepath == "NONE")
             {

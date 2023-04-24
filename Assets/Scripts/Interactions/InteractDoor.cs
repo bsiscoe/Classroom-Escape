@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractDoor : Interactable
+public class InteractDoor : Interactable, IInteractable
 {
     public Animator anim;
     private bool isOpen;
@@ -12,22 +12,15 @@ public class InteractDoor : Interactable
         anim = this.transform.parent.GetComponent<Animator>();
     }
 
-    void Update()
+    public void Interact()
     {
-        if (!playerInRange)
+        if (!isOpen)
         {
-            return;
+            OpenDoor();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        else
         {
-            if (!isOpen)
-            {
-                OpenDoor();
-            }
-            else
-            {
-                CloseDoor();
-            }
+            CloseDoor();
         }
     }
 

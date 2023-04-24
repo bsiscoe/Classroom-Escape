@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,12 @@ public class AreaTransition : MonoBehaviour
     public Vector2 newCamMinPos;
     public Vector2 newCamMaxPos;
     public Vector3 newPlayerPosition;
+    public bool smoothingDisabled;
+    public Vector3 targetCam;
     GameObject player;
     CameraController cam;
     Animator fade;
+   
 
     private void Start()
     {
@@ -20,13 +24,17 @@ public class AreaTransition : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.gameObject.HasTag("Player"))
+        {
+            return;
+        }
         StartCoroutine(StartTransition());
     }
 
     IEnumerator StartTransition()
     {
         PlayerAttributes attributes = player.GetComponent<PlayerAttributes>();
-        attributes.currentState = PlayerState.transition;
+        attributes.ChangeState(PlayerState.transition);
 
         if (hasFadeEffect)
         {
@@ -36,6 +44,10 @@ public class AreaTransition : MonoBehaviour
         fade.ResetTrigger("Start");
 
         player.transform.position = newPlayerPosition;
+        if (smoothingDisabled) 
+        {
+            cam.transform.position = targetCam;
+        }
         cam.minPosition = newCamMinPos;
         cam.maxPosition = newCamMaxPos;
 
@@ -45,6 +57,6 @@ public class AreaTransition : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
 
-        attributes.currentState = PlayerState.idle;
-    }
+        attributes.ChangeState(PlayerState.idle);
+    }   
 }

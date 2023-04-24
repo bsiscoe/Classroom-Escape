@@ -5,7 +5,7 @@ using UnityEngine;
 public class TriggerRegisterer : MonoBehaviour
 {
     
-    public PlayerAttributes player;
+    PlayerAttributes player;
     // Start is called before the first frame update
     void Start()
     {
