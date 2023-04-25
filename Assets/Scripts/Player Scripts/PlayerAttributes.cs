@@ -39,7 +39,10 @@ public class PlayerAttributes : MonoBehaviour
     public bool canMoveUp = true;
     public bool canMoveDown = true;
     public PlayerState currentState;
+
+    public bool isMovingDiagonally;
     public PlayerDirection currentDirection;
+    public KeyCode lastMovementKeyHit;
 
     public bool updateFacing = true;
 
@@ -78,6 +81,7 @@ public class PlayerAttributes : MonoBehaviour
         if (updateFacing)
         {
             UpdateDirection(change);
+            flashlight.UpdateFlashlightDirection();
         }
         // Moves the player's position in the direction of the change
         if (currentState != PlayerState.forcedReading)
@@ -87,7 +91,7 @@ public class PlayerAttributes : MonoBehaviour
             rb.MovePosition(newPosition);
             if (updateFacing)
             {
-                flashlight.UpdateFlashlightDirection(change);
+                //flashlight.UpdateFlashlightDirection();
             }
         }
     }
@@ -97,6 +101,12 @@ public class PlayerAttributes : MonoBehaviour
         {
             return;
         }
+
+        if (updateFacing)
+        {
+            LogLastMovementKey();
+        }
+
         bool inRangeOfTrigger = collidingTriggers.Count > 0;
         bool isReading = currentState == PlayerState.unforcedReading || currentState == PlayerState.forcedReading;
         if (Input.GetKeyDown(KeyCode.Space) && inRangeOfTrigger && !isReading)
@@ -196,21 +206,91 @@ public class PlayerAttributes : MonoBehaviour
 
     void UpdateDirection(Vector3 change)
     {
-        if (change.x < 0)
+        CheckForDiagonalMovement(change);
+        if (!isMovingDiagonally)
         {
-            currentDirection = PlayerDirection.left;
+            if (change.x < 0)
+            {
+                SetDirection(PlayerDirection.left);
+            }
+            else if (change.x > 0)
+            {
+                SetDirection(PlayerDirection.right);
+            }
+            else if (change.y < 0)
+            {
+                SetDirection(PlayerDirection.down);
+            }
+            else if (change.y > 0)
+            {
+                SetDirection(PlayerDirection.up);
+            }
         }
-        else if (change.x > 0)
+        else
         {
-            currentDirection = PlayerDirection.right;
+            if (lastMovementKeyHit.Equals(KeyCode.A) || lastMovementKeyHit.Equals(KeyCode.LeftArrow))
+            {
+                SetDirection(PlayerDirection.left);
+            }
+            else if (lastMovementKeyHit.Equals(KeyCode.D) || lastMovementKeyHit.Equals(KeyCode.RightArrow))
+            {
+                SetDirection(PlayerDirection.right);
+            }
+            else if (lastMovementKeyHit.Equals(KeyCode.S) || lastMovementKeyHit.Equals(KeyCode.DownArrow))
+            {
+                SetDirection(PlayerDirection.down);
+            }
+            else if (lastMovementKeyHit.Equals(KeyCode.W) || lastMovementKeyHit.Equals(KeyCode.UpArrow))
+            {
+                SetDirection(PlayerDirection.up);
+            }
         }
-        else if (change.y < 0)
-        {
-            currentDirection = PlayerDirection.down;
+    }
+
+    void LogLastMovementKey()
+    {
+        if (Input.GetKeyDown(KeyCode.W)) {
+            lastMovementKeyHit = KeyCode.W;
         }
-        else if (change.y > 0)
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            currentDirection = PlayerDirection.up;
+            lastMovementKeyHit = KeyCode.S;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            lastMovementKeyHit = KeyCode.D;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            lastMovementKeyHit = KeyCode.A;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            lastMovementKeyHit = KeyCode.UpArrow;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            lastMovementKeyHit = KeyCode.DownArrow;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            lastMovementKeyHit = KeyCode.LeftArrow;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            lastMovementKeyHit = KeyCode.RightArrow;
+        }
+    }
+
+    void CheckForDiagonalMovement(Vector3 change)
+    {
+        if (change.x != 0 && change.y != 0)
+        {
+            isMovingDiagonally = true;
+        }
+        else
+        {
+            isMovingDiagonally = false;
         }
     }
 

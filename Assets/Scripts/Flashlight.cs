@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class Flashlight : MonoBehaviour
     private Slider chargeDisplay;
     private Light2D flashlight;
     private Animator anim;
+    private Animator playerAnim;
+    private PlayerAttributes playerAttributes;
     [HideInInspector] public bool isBatteryInfinite;
     public bool hasFlashlight;
     public int currentBatteryCharge;
@@ -18,6 +21,8 @@ public class Flashlight : MonoBehaviour
         chargeDisplay = GameObject.FindGameObjectWithTag("FlashlightCharge").GetComponent<Slider>();
         flashlight = GetComponent<Light2D>();
         anim = GetComponent<Animator>();
+        playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        playerAttributes = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttributes>();
         isBatteryInfinite = false;
         hasFlashlight = false;
         currentBatteryCharge = 100;
@@ -34,6 +39,7 @@ public class Flashlight : MonoBehaviour
         if (!HasCharge())
         {
             flashlight.enabled = false;
+            playerAnim.SetBool("Flashlight", false);
         }
     }
 
@@ -42,6 +48,7 @@ public class Flashlight : MonoBehaviour
         if (!flashlight.enabled && HasCharge() && hasFlashlight)
         {
             flashlight.enabled = true;
+            playerAnim.SetBool("Flashlight", true);
             if (!isBatteryInfinite)
             {
                 InvokeRepeating("DrainBattery", 0, 5f);
@@ -50,6 +57,7 @@ public class Flashlight : MonoBehaviour
         else
         {
             flashlight.enabled = false;
+            playerAnim.SetBool("Flashlight", false);
             CancelInvoke("DrainBattery");
         }
     }
@@ -62,28 +70,28 @@ public class Flashlight : MonoBehaviour
         }
     }
 
-    public void UpdateFlashlightDirection(Vector3 direction)
+    public void UpdateFlashlightDirection()
     {
-        if (direction.y < 0)
+        if (playerAttributes.currentDirection.Equals(PlayerDirection.down))
         {
             ResetFlashlightBool();
             anim.SetBool("down", true);
         }
-        else if (direction.y > 0)
+        else if (playerAttributes.currentDirection.Equals(PlayerDirection.up))
         {
             ResetFlashlightBool();
             anim.SetBool("up", true);
         }
-        else if (direction.x > 0)
+        else if (playerAttributes.currentDirection.Equals(PlayerDirection.right))
         {
             ResetFlashlightBool();
             anim.SetBool("right", true);
         }
-        else if (direction.x < 0)
+        else if (playerAttributes.currentDirection.Equals(PlayerDirection.left))
         {
             ResetFlashlightBool();
             anim.SetBool("left", true);
-        }
+        }        
     }
     void DrainBattery()
     { 

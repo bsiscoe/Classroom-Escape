@@ -1980,6 +1980,30 @@ SpriteAtlas:
   - {fileID: 1988866720, guid: 3dfbd0b5621a9e14c822e8a9842009f6, type: 3}
   - {fileID: -1752204834, guid: 3dfbd0b5621a9e14c822e8a9842009f6, type: 3}
   - {fileID: -414871447, guid: 3dfbd0b5621a9e14c822e8a9842009f6, type: 3}
+  - {fileID: 612039009, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -615455718, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 2040536599, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 1004516222, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 1756073539, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -1941662817, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -2032517113, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 756094651, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 122192176, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 1171622595, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -1009004095, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 208701674, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 407095862, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 1361316753, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 1534296676, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -1977432175, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -1672183296, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -819382305, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 116594826, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -177906491, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -951091223, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: 369897453, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -918129893, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
+  - {fileID: -787594269, guid: 278736e883636fe42b56e4c0148dc4b8, type: 3}
   - {fileID: -1381591871, guid: 9f77fbd9256069e489cfb56c0b306e0b, type: 3}
   - {fileID: 957715680, guid: 9f77fbd9256069e489cfb56c0b306e0b, type: 3}
   - {fileID: -120177537, guid: 9f77fbd9256069e489cfb56c0b306e0b, type: 3}
@@ -3263,6 +3287,7 @@ SpriteAtlas:
   - {fileID: 464522174, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
   - {fileID: -1649857284, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
   - {fileID: 1850201753, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
+  - {fileID: 878392406, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
   - {fileID: 2105554159, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
   - {fileID: -295811739, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
   - {fileID: 1335420733, guid: d8d81c6cff5c2334ca484fd02c7178cf, type: 3}
@@ -5777,6 +5802,30 @@ SpriteAtlas:
   - Room_Builder_Floors_16x16_105
   - Room_Builder_Floors_16x16_135
   - Room_Builder_Floors_16x16_161
+  - Jandy Flashlight_19
+  - Jandy Flashlight_18
+  - Jandy Flashlight_11
+  - Jandy Flashlight_10
+  - Jandy Flashlight_13
+  - Jandy Flashlight_12
+  - Jandy Flashlight_15
+  - Jandy Flashlight_14
+  - Jandy Flashlight_17
+  - Jandy Flashlight_16
+  - Jandy Flashlight_20
+  - Jandy Flashlight_21
+  - Jandy Flashlight_22
+  - Jandy Flashlight_23
+  - Jandy Flashlight_2
+  - Jandy Flashlight_3
+  - Jandy Flashlight_0
+  - Jandy Flashlight_1
+  - Jandy Flashlight_6
+  - Jandy Flashlight_7
+  - Jandy Flashlight_4
+  - Jandy Flashlight_5
+  - Jandy Flashlight_8
+  - Jandy Flashlight_9
   - 17_Visibile_Upstairs_System_16x16_41
   - 17_Visibile_Upstairs_System_16x16_92
   - 17_Visibile_Upstairs_System_16x16_40
@@ -7060,6 +7109,7 @@ SpriteAtlas:
   - Jandy Sprites_484
   - Jandy Sprites_391
   - Jandy Sprites_321
+  - Jandy Sprites_485
   - Jandy Sprites_499
   - Jandy Sprites_419
   - Jandy Sprites_392

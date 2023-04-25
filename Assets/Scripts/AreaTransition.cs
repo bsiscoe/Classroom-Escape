@@ -56,7 +56,7 @@ public class AreaTransition : MonoBehaviour
             fade.SetTrigger("End");
         }
         yield return new WaitForSeconds(1f);
-
+        fade.ResetTrigger("End");
         attributes.ChangeState(PlayerState.idle);
     }   
 }
