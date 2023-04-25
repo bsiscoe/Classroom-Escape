@@ -42,10 +42,10 @@ public class DarkRoomCutscene : MonoBehaviour
         {
             return;
         }
-        else if (collision.gameObject.HasTag("Player"))
+        else if (collision.gameObject.HasTag("Player") && !collision.isTrigger)
         {
             firstTime = false;
-           StartCoroutine(PlayCustscene());
+            StartCoroutine(PlayCustscene());
         }
         }
 

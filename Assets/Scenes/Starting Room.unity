@@ -2859,13 +2859,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5418e5eb5bdf0fe49b8e17a4af59c6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  context: {fileID: 11400000, guid: fae91ed3b2fd10c4a89590f9e81f581d, type: 2}
-  player: {fileID: 0}
   dialogueText: {fileID: 4900000, guid: df7748e24aac7cf4da5b381274a79a6e, type: 3}
   forceAllDialogue: 0
   currentBatch: 0
   timesRead: 0
+  scrollSpeed: 0
+  playerInRange: 0
   getBatches: []
 --- !u!1 &519420028
 GameObject:
@@ -3097,13 +3096,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbdabda2a969f24e938634415e9ff50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  context: {fileID: 11400000, guid: 373a1d57a9bd81a4782ae5a503fe16ad, type: 2}
-  player: {fileID: 0}
   dialogueText: {fileID: 4900000, guid: fce0cd62262f7e944ae112389572ffb9, type: 3}
   forceAllDialogue: 1
   currentBatch: 0
   timesRead: 0
+  scrollSpeed: 0
+  playerInRange: 0
   getBatches: []
 --- !u!114 &546247786
 MonoBehaviour:
@@ -3669,13 +3667,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbdabda2a969f24e938634415e9ff50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  context: {fileID: 11400000, guid: 373a1d57a9bd81a4782ae5a503fe16ad, type: 2}
-  player: {fileID: 0}
   dialogueText: {fileID: 4900000, guid: c2386dcf682d47f4db69ef52a1d2083b, type: 3}
   forceAllDialogue: 1
   currentBatch: 0
   timesRead: 0
+  scrollSpeed: 0
+  playerInRange: 0
   getBatches: []
 --- !u!114 &914700650
 MonoBehaviour:
@@ -4134,6 +4131,10 @@ PrefabInstance:
       propertyPath: newPlayerPosition.y
       value: -33.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1917000853639506144, guid: 5b4e63efb55b9d147a9596154a31dedb, type: 3}
+      propertyPath: transitionIntoDialogue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1917000853639506145, guid: 5b4e63efb55b9d147a9596154a31dedb, type: 3}
       propertyPath: m_Name
       value: Transition to Closet
@@ -4575,6 +4576,97 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!1 &1570647889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570647893}
+  - component: {fileID: 1570647891}
+  - component: {fileID: 1570647890}
+  - component: {fileID: 1570647894}
+  m_Layer: 0
+  m_Name: Spider Jumpscare
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1570647890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570647889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006412ef87e4f3f4099ad990606d0cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1570647891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570647889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbdabda2a969f24e938634415e9ff50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 4900000, guid: f86b1be639090b74283bb8a1359e765d, type: 3}
+  forceAllDialogue: 1
+  currentBatch: 0
+  timesRead: 0
+  scrollSpeed: 0
+  playerInRange: 0
+  getBatches: []
+--- !u!4 &1570647893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570647889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: -33.87, z: 0.14595759}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1570647894
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570647889}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.6851115, y: -0.2602024}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.370223, y: 1.5204048}
+  m_EdgeRadius: 0
 --- !u!1 &1571502917
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,7 +6731,7 @@ Transform:
   - {fileID: 914700648}
   - {fileID: 2146012530}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793938861
 GameObject:
@@ -8124,6 +8216,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 455466142, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 585987096, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
       propertyPath: m_TagString
       value: FlashlightCharge
@@ -8134,6 +8230,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1573070910, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573070912, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2431105163436968953, guid: ef4e38293750b7f4b82d890f4f19d22a, type: 3}

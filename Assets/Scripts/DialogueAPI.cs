@@ -8,16 +8,22 @@ using System.Linq;
 using System;
 using Unity.VisualScripting;
 
-public class DialogueAPI : Interactable
+public class DialogueAPI : MonoBehaviour
 {
     [SerializeField] TextAsset dialogueText;
     [SerializeField] bool forceAllDialogue;
     [SerializeField] int currentBatch;
     [SerializeField] int timesRead;
+    [SerializeField] float scrollSpeed;
+    [SerializeField] bool playerInRange;
+
+    float baseSpeed;
 
     // Variables for animation :D
     int currentFrame;
     Texture2D[] animationFrames;
+
+    PlayerAttributes player;
 
     bool nextLine;
 
@@ -32,13 +38,16 @@ public class DialogueAPI : Interactable
 
     RawImage CG;
 
+    Animator fadeAnim;
+
     public List<string> getBatches;
     public List<string[]> dialougeBatches;
 
     public void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttributes>();
-
+        baseSpeed = 0.035f;
+        scrollSpeed = 1f;
         timesRead = 0;
         nextLine = false;
         dialougeBatches = new List<string[]>();
@@ -50,6 +59,7 @@ public class DialogueAPI : Interactable
         nameBox = GameObject.FindGameObjectWithTag("NameBox").GetComponent<RawImage>();
         nameText = GameObject.FindGameObjectWithTag("NameText").GetComponent<TextMeshProUGUI>();
         textInBox = GameObject.FindGameObjectWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
+        fadeAnim = GameObject.FindGameObjectWithTag("Fade").GetComponent<Animator>();
         CG = GameObject.FindGameObjectWithTag("CG").GetComponent<RawImage>();
 
         getBatches = dialogueText.text.Split("\n*--*\n").ToList();
@@ -58,12 +68,34 @@ public class DialogueAPI : Interactable
             dialougeBatches.Add(batch.Split('\n'));
         }
     }
-    public void PlayDialogue()
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        StartCoroutine(PlayDialogue(forceAllDialogue));
+       if (other.gameObject.HasTag("Player") && !other.isTrigger)
+        {
+            playerInRange = true;
+        }
     }
 
-    IEnumerator PlayDialogue(bool isForced)
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.HasTag("Player") && !collision.isTrigger)
+        {
+            playerInRange = false;
+        }
+    }
+
+    public void PlayDialogue()
+    {
+        StartCoroutine(PlayDialogue(forceAllDialogue, false));
+    }
+
+    public void PlayDialogueWithFadeOut()
+    {
+        StartCoroutine(PlayDialogue(forceAllDialogue, true));
+    }
+
+    IEnumerator PlayDialogue(bool isForced, bool useFade)
     {
         bool firstLine = true;
         if (player != null && isForced)
@@ -107,7 +139,21 @@ public class DialogueAPI : Interactable
             }
         }
 
-        CloseDialogue();
+        if (useFade)
+        {
+            fadeAnim.SetTrigger("Start");
+            yield return new WaitForSeconds(1f);
+            fadeAnim.ResetTrigger("Start");
+            CloseDialogue();
+            fadeAnim.SetTrigger("End");
+            yield return new WaitForSeconds(1f);
+            fadeAnim.ResetTrigger("End");
+        }
+        else
+        {
+            CloseDialogue();
+        }
+
         if (player != null)
         {
             player.ChangeState(PlayerState.idle);
@@ -139,7 +185,6 @@ public class DialogueAPI : Interactable
     {
         textPosition.sizeDelta = new Vector2(100, 50);
         characterPortrait.texture = Resources.Load<Texture>(filepath);
-        print("Pic: " + characterPortrait.texture);
         characterPortrait.enabled = true;
     }
     private void LoadImage(Texture2D texture)
@@ -203,7 +248,6 @@ public class DialogueAPI : Interactable
         else if (line.StartsWith("[NAME]"))
         {
             string name = line.Substring(7);
-            print("Name to display: " + name);
             if (name == "NONE")
             {
                 UnloadName();
@@ -215,7 +259,6 @@ public class DialogueAPI : Interactable
         else if (line.StartsWith("[IMG]"))
         {
             string filepath = line.Substring(6);
-            print("File to display: " + filepath);
             CancelInvoke("ScrollAnimation");
             if (filepath == "NONE")
             {
@@ -232,7 +275,6 @@ public class DialogueAPI : Interactable
             string[] pathAndDelay = line.Split(':');
             animationFrames = Resources.LoadAll<Texture2D>(pathAndDelay[0]);
             float delay = float.Parse(pathAndDelay[1]);
-            print("filepath: " + pathAndDelay[0] + " delay: " + delay);
             currentFrame = 0;
             InvokeRepeating("ScrollAnimation", 0, delay);
             return true;
@@ -241,6 +283,11 @@ public class DialogueAPI : Interactable
         {
             string filepath = line.Substring(5);
             LoadCG(filepath);
+            return true;
+        }
+        else if (line.StartsWith("[SPEED]"))
+        {
+            scrollSpeed = float.Parse(line.Substring(7));
             return true;
         }
         return false;
@@ -266,7 +313,8 @@ public class DialogueAPI : Interactable
 
     IEnumerator ScrollDialogue()
     {
-        InvokeRepeating("IncreaseVisable", 0, 0.035f);
+        float finalSpeed = baseSpeed / scrollSpeed;
+        InvokeRepeating("IncreaseVisable", 0, finalSpeed);
         while (!nextLine && playerInRange && textInBox.maxVisibleCharacters < textInBox.GetTextInfo(textInBox.text).characterCount)
         {
             if (Input.GetKeyDown(KeyCode.Space))

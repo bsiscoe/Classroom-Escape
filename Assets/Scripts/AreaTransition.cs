@@ -6,6 +6,7 @@ using UnityEngine;
 public class AreaTransition : MonoBehaviour
 {
     public bool hasFadeEffect;
+    public bool transitionIntoDialogue;
     public Vector2 newCamMinPos;
     public Vector2 newCamMaxPos;
     public Vector3 newPlayerPosition;
@@ -51,12 +52,18 @@ public class AreaTransition : MonoBehaviour
         cam.minPosition = newCamMinPos;
         cam.maxPosition = newCamMaxPos;
 
-        if (hasFadeEffect) 
+        if (hasFadeEffect)
         {
             fade.SetTrigger("End");
         }
         yield return new WaitForSeconds(1f);
-        fade.ResetTrigger("End");
-        attributes.ChangeState(PlayerState.idle);
+
+        if (!transitionIntoDialogue)
+        {
+            attributes.ChangeState(PlayerState.idle);
+        } else
+        {
+            transitionIntoDialogue = false;
+        }
     }   
 }

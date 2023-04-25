@@ -23,7 +23,7 @@ public class Flashlight : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAnim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         playerAttributes = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttributes>();
-        isBatteryInfinite = false;
+        isBatteryInfinite = true;
         hasFlashlight = false;
         currentBatteryCharge = 100;
         if (flashlight.enabled && !isBatteryInfinite)
