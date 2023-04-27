@@ -2360,7 +2360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272523578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -3.5, z: 0}
+  m_LocalPosition: {x: 0.4, y: -3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2429,6 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3fc2d59df5ed2a49bd8f9bd79dbbfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
 --- !u!1 &404930819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,6 +3155,7 @@ GameObject:
   - component: {fileID: 666594584}
   - component: {fileID: 666594582}
   - component: {fileID: 666594583}
+  - component: {fileID: 666594585}
   m_Layer: 0
   m_Name: Desk Horizontal Trigger
   m_TagString: Untagged
@@ -3189,7 +3191,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0039322376, y: 0}
+  m_Offset: {x: -0.7390083, y: 0.15874791}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3200,7 +3202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2359271, y: 1}
+  m_Size: {x: 0.4612372, y: 0.70790386}
   m_EdgeRadius: 0
 --- !u!114 &666594582
 MonoBehaviour:
@@ -3242,6 +3244,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c45c8dceb477384885862d59e6a1323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &666594585
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666594579}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.6857911, y: 0.13334823}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.44120753, y: 0.73330355}
+  m_EdgeRadius: 0
 --- !u!1 &715866143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,6 +3971,7 @@ GameObject:
   - component: {fileID: 1255208046}
   - component: {fileID: 1255208044}
   - component: {fileID: 1255208045}
+  - component: {fileID: 1255208047}
   m_Layer: 0
   m_Name: Desk Vertical Trigger
   m_TagString: Untagged
@@ -3978,7 +4007,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.14012146}
+  m_Offset: {x: 0.015470386, y: 0.87443674}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3989,7 +4018,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5864363}
+  m_Size: {x: 0.75154424, y: 0.32132602}
   m_EdgeRadius: 0
 --- !u!114 &1255208044
 MonoBehaviour:
@@ -4031,6 +4060,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c45c8dceb477384885862d59e6a1323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1255208047
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255208041}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.019050002, y: -0.71754074}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7587035, y: 0.6063051}
+  m_EdgeRadius: 0
 --- !u!1001 &1282140615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6552,7 +6607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1661922601
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8122,6 +8177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 289169069097952502, guid: cc7b2ee058ceaff45a68172a41bd3cee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc7b2ee058ceaff45a68172a41bd3cee, type: 3}
 --- !u!1001 &1917000854632837867
@@ -8406,9 +8465,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7997535487197002316, guid: 00b6ff94497caf646b80be951c6b3fcf, type: 3}
+      propertyPath: m_Size.x
+      value: 1.060245
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997535487197002316, guid: 00b6ff94497caf646b80be951c6b3fcf, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0017719269
+      objectReference: {fileID: 0}
     - target: {fileID: 7997535488391762996, guid: 00b6ff94497caf646b80be951c6b3fcf, type: 3}
       propertyPath: m_Name
       value: Door to Room 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997535488391762996, guid: 00b6ff94497caf646b80be951c6b3fcf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7997535488391762998, guid: 00b6ff94497caf646b80be951c6b3fcf, type: 3}
       propertyPath: m_RootOrder

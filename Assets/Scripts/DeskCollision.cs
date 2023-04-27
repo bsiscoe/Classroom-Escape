@@ -6,17 +6,43 @@ public class DeskCollision : MonoBehaviour
 {
     private PlayerAttributes player;
 
+
+    [SerializeField] public ContactPoint2D[] points;
+    [SerializeField] public Collision2D col;
+    public int test;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttributes>();
     }
+
+    private void Update()
+    {
+        if (col != null)
+        {
+            points = col.contacts;
+        }       
+        else
+        {
+            points = null; 
+        }
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.HasTag("Player"))
+        {
+            return;
+        }
         EnableCollisionWithPlayer(collision);
+        col = collision;
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
+        if (collision.gameObject.HasTag("Player"))
+        {
+            return;
+        }
         EnableCollisionWithPlayer(collision);
     }
 
@@ -31,12 +57,27 @@ public class DeskCollision : MonoBehaviour
         {
             return;
         }
-        bool collisionIsHorizontal = Mathf.Abs(collision.contacts[0].normal.x) > 0.5f;
+        bool collisionIsHorizontal = false;
+        bool collisionIsVertical = false;
+
+        foreach(ContactPoint2D point in collision.contacts)
+        {
+            if (Mathf.Abs(point.normal.x) > 0.5f)
+            {
+                collisionIsHorizontal = true;
+            }
+            if (Mathf.Abs(point.normal.y) > 0.5f)
+            {
+                collisionIsVertical = true;
+            }
+        }
+
+        print(collision.GetContact(collision.contactCount - 1).rigidbody.gameObject);
         if (player.canMoveHorizontal && collisionIsHorizontal)
         {
             this.transform.gameObject.layer = LayerMask.NameToLayer("Default");
         }
-        else if (player.canMoveVertical && !collisionIsHorizontal)
+        else if (player.canMoveVertical && collisionIsVertical)
         {
             this.transform.gameObject.layer = LayerMask.NameToLayer("Default");
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -59,7 +60,8 @@ public class PushableDesk : MonoBehaviour, IInteractable
             {
                 RestrictPlayerMovement(isHorizontal, horizontalDistance);
                 RestrictPlayerDirection(isHorizontal);
-                Vector3 newPosition = player.transform.position - new Vector3(horizontalDistance, 0.5f, 0);
+                Vector3 newPosition = player.transform.position - new Vector3(horizontalDistance, 0, 0);
+                newPosition.y = this.gameObject.transform.parent.transform.position.y;
                 desk.MovePosition(newPosition);
             }
             else
@@ -67,6 +69,7 @@ public class PushableDesk : MonoBehaviour, IInteractable
                 RestrictPlayerMovement(isHorizontal, verticalDistance);
                 RestrictPlayerDirection(isHorizontal);
                 Vector3 newPosition = player.transform.position - new Vector3(0, verticalDistance, 0);
+                newPosition.x = this.gameObject.transform.parent.transform.position.x;
                 desk.MovePosition(newPosition);
             }
             yield return null;
@@ -144,6 +147,8 @@ public class PushableDesk : MonoBehaviour, IInteractable
             float distance = GetVerticalDistance(player.transform.position, this.transform.parent.transform.position);
             if (Mathf.Abs(distance) > maxDistance + 0.1f)
             {
+                print("in");
+                print(distance);
                 if (distance < 0)
                 {
                     attributes.canMoveDown = false;
@@ -174,7 +179,8 @@ public class PushableDesk : MonoBehaviour, IInteractable
         }
         else
         {
-            bool playerIsAboveOfDesk = GetVerticalDistance(player.transform.position, this.transform.position) > 0;
+            Vector3 offsetDeskPosition = this.transform.position + new Vector3(0, 1, 0);
+            bool playerIsAboveOfDesk = GetVerticalDistance(player.transform.position, offsetDeskPosition) > 0;
             if (playerIsAboveOfDesk)
             {
                 attributes.SetDirection(PlayerDirection.down);

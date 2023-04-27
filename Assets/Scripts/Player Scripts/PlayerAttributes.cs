@@ -153,7 +153,7 @@ public class PlayerAttributes : MonoBehaviour
         }
         if (!canMoveDown)
         {
-            if (change.y > 0)
+            if (change.y < 0)
             {
                 change.y = 0;
             }
