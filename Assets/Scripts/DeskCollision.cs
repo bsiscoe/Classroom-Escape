@@ -71,8 +71,6 @@ public class DeskCollision : MonoBehaviour
                 collisionIsVertical = true;
             }
         }
-
-        print(collision.GetContact(collision.contactCount - 1).rigidbody.gameObject);
         if (player.canMoveHorizontal && collisionIsHorizontal)
         {
             this.transform.gameObject.layer = LayerMask.NameToLayer("Default");

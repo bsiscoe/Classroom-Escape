@@ -101,6 +101,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -243,13 +267,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 15}
-        - {x: -5, y: 11}
-        - {x: -8, y: 11}
+      - - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 11}
-        - {x: 5, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: 25e8efc163905bf4cae647f7c497efb6
@@ -296,13 +317,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 3, y: 14}
-        - {x: 0, y: 11}
-        - {x: -8, y: 11}
+      - - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 11}
-        - {x: 6, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: 417b1db8c0be4d84b964f743485dd360
@@ -324,14 +342,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 4, y: 12}
-        - {x: -1, y: 12}
-        - {x: -1, y: 11}
-        - {x: -8, y: 11}
+      - - {x: -8, y: 11}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 11}
-        - {x: 4, y: 11}
       tessellationDetail: 0
       bones: []
       spriteID: d57e06aead45cf745833da6fb0f6f9bb

@@ -147,7 +147,6 @@ public class PushableDesk : MonoBehaviour, IInteractable
             float distance = GetVerticalDistance(player.transform.position, this.transform.parent.transform.position);
             if (Mathf.Abs(distance) > maxDistance + 0.1f)
             {
-                print("in");
                 print(distance);
                 if (distance < 0)
                 {
@@ -179,7 +178,7 @@ public class PushableDesk : MonoBehaviour, IInteractable
         }
         else
         {
-            Vector3 offsetDeskPosition = this.transform.position + new Vector3(0, 1, 0);
+            Vector3 offsetDeskPosition = this.transform.position + new Vector3(0, 0.65f, 0);
             bool playerIsAboveOfDesk = GetVerticalDistance(player.transform.position, offsetDeskPosition) > 0;
             if (playerIsAboveOfDesk)
             {
