@@ -40,8 +40,8 @@ public class DialogueAPI : MonoBehaviour
 
     Animator fadeAnim;
 
-    public List<string> getBatches;
-    public List<string[]> dialougeBatches;
+    List<string> getBatches;
+    List<string[]> dialougeBatches;
 
     public void Awake()
     {

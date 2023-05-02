@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public enum PlayerState
@@ -29,7 +30,6 @@ public class PlayerAttributes : MonoBehaviour
     public float walkingSpeed = 5f;
     private float speed;
     public Flashlight flashlight;
-
 
     public bool canMoveHorizontal = true;
     public bool canMoveVertical = true;

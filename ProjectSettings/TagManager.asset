@@ -15,6 +15,7 @@ TagManager:
   - FlashlightCharge
   - CG
   - Fade
+  - InputField
   layers:
   - Default
   - TransparentFX
