@@ -16,6 +16,7 @@ TagManager:
   - CG
   - Fade
   - InputField
+  - GameManager
   layers:
   - Default
   - TransparentFX

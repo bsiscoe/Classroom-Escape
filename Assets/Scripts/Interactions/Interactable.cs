@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public bool playerInRange;
+    public bool currentlyInteracting;
     public SignalObject context;
 
     [HideInInspector] public PlayerAttributes player;
