@@ -11,6 +11,7 @@ public class DarkRoomCutscene : MonoBehaviour
     DialogueAPI dialogue;
     Animator playerAnim;
     bool firstTime;
+    public AudioSource cutsceneAudio; 
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class DarkRoomCutscene : MonoBehaviour
     IEnumerator PlayCustscene()
     {
         playerAttributes.ChangeState(PlayerState.forcedReading);
+        cutsceneAudio.Play();
         cutscene.Play();
         while (cutscene.state == PlayState.Playing)
         {
@@ -47,6 +49,5 @@ public class DarkRoomCutscene : MonoBehaviour
             firstTime = false;
             StartCoroutine(PlayCustscene());
         }
-        }
-
     }
+}
